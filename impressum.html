@@ -50,11 +50,21 @@
     .footer-links { display: flex; justify-content: center; gap: 1.5rem; font-size: 12px; color: var(--text-light); margin-bottom: .5rem; flex-wrap: wrap; }
     .footer-copy { font-size: 11px; color: var(--text-light); }
   </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-65TGMDTE4Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-65TGMDTE4Q');
+  </script>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo"><i class="ti ti-building-estate"></i> immo<span>vertrag</span>.ch</a>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="immovertrag.ch" style="height:38px;width:auto" />
+  </a>
   <a href="index.html" class="nav-back"><i class="ti ti-arrow-left"></i> Zurück zur Startseite</a>
 </nav>
 
@@ -71,10 +81,7 @@
         <div class="info-label"><i class="ti ti-building"></i> Firma</div>
         <div class="info-val">Alpha CTR GmbH</div>
       </div>
-      <div class="info-row">
-        <div class="info-label"><i class="ti ti-map-pin"></i> Adresse</div>
-        <div class="info-val">Einsiedlerstrasse 132b, 8810 Horgen</div>
-      </div>
+      
       <div class="info-row">
         <div class="info-label"><i class="ti ti-world"></i> Website</div>
         <div class="info-val"><a href="https://immovertrag.ch">immovertrag.ch</a></div>
@@ -83,10 +90,7 @@
         <div class="info-label"><i class="ti ti-mail"></i> E-Mail</div>
         <div class="info-val"><a href="mailto:info@immovertrag.ch">info@immovertrag.ch</a></div>
       </div>
-      <div class="info-row">
-        <div class="info-label"><i class="ti ti-phone"></i> Telefon</div>
-        <div class="info-val"><a href="tel:+41794382149">+41 79 438 21 49</a></div>
-      </div>
+      
       <div class="info-row">
         <div class="info-label"><i class="ti ti-certificate"></i> UID</div>
         <div class="info-val">CHE-414.244.970</div>
@@ -165,8 +169,8 @@
 
     <h3>10. Kontakt bei Datenschutzfragen</h3>
     <p>Bei Fragen zum Datenschutz wende dich bitte an:<br>
-    Alpha CTR GmbH &middot; Einsiedlerstrasse 132b, 8810 Horgen<br>
-    <a href="mailto:info@immovertrag.ch">info@immovertrag.ch</a> &middot; <a href="tel:+41794382149">+41 79 438 21 49</a></p>
+    immovertrag.ch<br>
+    <a href="mailto:info@immovertrag.ch">info@immovertrag.ch</a></p>
   </div>
 
   <!-- AGB -->
@@ -192,13 +196,13 @@
 </div>
 
 <footer>
-  <div class="footer-logo">immo<span>vertrag</span>.ch</div>
+  <img src="logo.png" alt="immovertrag.ch" style="height:36px;width:auto;margin-bottom:.5rem" />
   <div class="footer-links">
     <a href="index.html">Startseite</a>
     <a href="impressum.html">Impressum</a>
     <a href="mailto:info@immovertrag.ch">Kontakt</a>
   </div>
-  <div class="footer-copy">&copy; 2025 immovertrag.ch &middot; Alpha CTR GmbH &middot; Horgen &middot; CHE-414.244.970</div>
+  <div class="footer-copy">&copy; 2025 immovertrag.ch &middot; Alle Rechte vorbehalten</div>
 </footer>
 
 </body>
