@@ -463,12 +463,37 @@ function buildPreview() {
   `;
 }
 
+async function saveEmailToBrevo(email) {
+  try {
+    await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'api-key': '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'
+      },
+      body: JSON.stringify({
+        email: email,
+        listIds: [2],
+        updateEnabled: true,
+        attributes: {
+          QUELLE: 'Mietvertrag Generator',
+          DATUM: new Date().toLocaleDateString('de-CH')
+        }
+      })
+    });
+  } catch(e) {
+    console.log('Brevo:', e);
+  }
+}
+
 function downloadPDF() {
   const email = document.getElementById('gate-email').value.trim();
   if (!email || !email.includes('@')) {
     alert('Bitte gib eine gültige E-Mail-Adresse ein.');
     return;
   }
+  saveEmailToBrevo(email);
 
   try {
     const { jsPDF } = window.jspdf;
