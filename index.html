@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>immovertrag.ch – Mietvertrag erstellen, gratis PDF, Schweizer Recht</title>
+  <meta name="description" content="Mietvertrag nach Schweizer Recht online erstellen und gratis als PDF herunterladen. Inkl. Nebenkosten, Hausordnung und Übergabeprotokoll. OR Art. 253 ff. konform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gruen: #1D9E75;
+      --gruen-dark: #0F6E56;
+      --gruen-light: #E1F5EE;
+      --gruen-mid: #9FE1CB;
+      --text: #0e1c14;
+      --text-mid: #3d5247;
+      --text-light: #7a9488;
+      --bg: #f7f9f7;
+      --white: #ffffff;
+      --border: #dce8e2;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); font-size: 15px; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0 2rem; height: 64px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .nav-logo span { color: var(--gruen); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; font-size: 14px; color: var(--text-mid); }
+    .nav-links a:hover { color: var(--gruen); }
+    .nav-cta {
+      background: var(--gruen); color: #fff; padding: 9px 20px; border-radius: 7px;
+      font-size: 14px; font-weight: 500; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--gruen-dark); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .hero { padding: 5rem 2rem 4rem; text-align: center; max-width: 800px; margin: 0 auto; animation: fadeUp 0.6s ease; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gruen-light); color: var(--gruen-dark);
+      font-size: 12px; font-weight: 500; padding: 5px 16px; border-radius: 20px; margin-bottom: 1.75rem;
+    }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; line-height: 1.12; margin-bottom: 1.25rem; }
+    .hero h1 em { color: var(--gruen); font-style: normal; }
+    @media (max-width: 640px) { .hero h1 { font-size: 36px; } }
+    .hero-sub { font-size: 17px; color: var(--text-mid); max-width: 560px; margin: 0 auto 2.25rem; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .btn-primary {
+      background: var(--gruen); color: #fff; padding: 15px 30px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; cursor: pointer; border: none;
+      font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 8px; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--gruen-dark); }
+    .btn-secondary {
+      background: var(--white); color: var(--text); padding: 15px 30px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; cursor: pointer; border: 1px solid var(--border);
+      font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 8px; transition: all 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--gruen); color: var(--gruen); }
+    .hero-note { font-size: 12px; color: var(--text-light); }
+    .hero-note strong { color: var(--gruen); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .trust-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-mid); }
+    .trust-item i { color: var(--gruen); font-size: 16px; }
+
+    /* SECTION */
+    .section { padding: 4.5rem 2rem; max-width: 960px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gruen); margin-bottom: .5rem; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { font-size: 16px; color: var(--text-mid); max-width: 580px; margin-bottom: 2.5rem; line-height: 1.75; }
+    .divider { height: 1px; background: var(--border); max-width: 960px; margin: 0 auto; }
+
+    /* HOW IT WORKS */
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step-card { text-align: center; padding: 1.5rem 1rem; }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--gruen); color: #fff;
+      font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+    }
+    .step-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+
+    /* FEATURES */
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 640px) { .feat-grid { grid-template-columns: 1fr; } }
+    .feat-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .feat-icon { width: 46px; height: 46px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 1rem; }
+    .feat-icon.green { background: var(--gruen-light); color: var(--gruen); }
+    .feat-icon.gray { background: #f0f0ee; color: #999; }
+    .feat-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+    .feat-desc { font-size: 12px; color: var(--text-mid); line-height: 1.65; }
+    .free-badge { font-size: 10px; background: var(--gruen-light); color: var(--gruen-dark); padding: 2px 8px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
+    .lock-badge { font-size: 10px; background: #f0f0ee; color: #999; padding: 2px 8px; border-radius: 20px; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+
+    /* SPAR RECHNUNG */
+    .spar-box {
+      background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+      padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    @media (max-width: 640px) { .spar-box { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .spar-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 1rem; }
+    .spar-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.5rem; }
+    .spar-nums { display: flex; flex-direction: column; gap: 12px; }
+    .spar-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .spar-row:last-child { border-bottom: none; font-weight: 500; font-size: 16px; }
+    .spar-row .neg { color: #A32D2D; }
+    .spar-row .pos { color: var(--gruen); font-size: 18px; font-weight: 700; }
+
+    /* PREISE */
+    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 640px) { .price-grid { grid-template-columns: 1fr; } }
+    .price-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; position: relative; }
+    .price-card.featured { border: 2px solid var(--gruen); }
+    .popular-tag {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--gruen); color: #fff; font-size: 11px; font-weight: 500;
+      padding: 3px 16px; border-radius: 20px; white-space: nowrap;
+    }
+    .price-name { font-size: 13px; color: var(--text-light); margin-bottom: 6px; font-weight: 500; }
+    .price-val { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; margin-bottom: 2px; }
+    .price-val span { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--text-mid); }
+    .price-desc { font-size: 12px; color: var(--text-light); margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+    .price-feats { display: flex; flex-direction: column; gap: 9px; margin-bottom: 1.5rem; }
+    .pf { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+    .pf i { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .pf i.yes { color: var(--gruen); }
+    .pf i.no { color: #ccc; }
+    .pf.off { color: #bbb; }
+    .price-btn {
+      width: 100%; padding: 11px; border-radius: 8px; font-size: 14px; font-weight: 500;
+      cursor: pointer; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border);
+      background: transparent; color: var(--text); transition: all 0.15s;
+    }
+    .price-btn:hover { border-color: var(--gruen); color: var(--gruen); }
+    .price-btn.primary { background: var(--gruen); color: #fff; border-color: var(--gruen); }
+    .price-btn.primary:hover { background: var(--gruen-dark); }
+
+    /* TESTIMONIALS */
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 640px) { .testi-grid { grid-template-columns: 1fr; } }
+    .testi { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .testi-stars { color: #E8A045; font-size: 14px; margin-bottom: .75rem; letter-spacing: 2px; }
+    .testi-text { font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+    .testi-name { font-size: 13px; font-weight: 500; }
+    .testi-role { font-size: 11px; color: var(--text-light); }
+
+    /* FAQ */
+    .faq { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      padding: 1.1rem 1.25rem; font-size: 14px; font-weight: 500; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--white); transition: background 0.12s; gap: 1rem;
+    }
+    .faq-q:hover { background: var(--bg); }
+    .faq-q i { font-size: 16px; color: var(--text-light); transition: transform 0.2s; flex-shrink: 0; }
+    .faq-a { display: none; padding: .875rem 1.25rem 1.1rem; font-size: 13px; color: var(--text-mid); line-height: 1.75; background: var(--bg); }
+
+    /* CTA BANNER */
+    .cta-section { padding: 2rem; }
+    .cta-banner {
+      background: var(--gruen); border-radius: 16px; padding: 3.5rem 2rem;
+      text-align: center; max-width: 960px; margin: 0 auto;
+    }
+    .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #fff; margin-bottom: .75rem; }
+    .cta-banner p { color: rgba(255,255,255,0.85); font-size: 16px; margin-bottom: 2rem; }
+    .btn-white {
+      background: #fff; color: var(--gruen); padding: 14px 30px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; cursor: pointer; border: none;
+      font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 8px; transition: all 0.15s;
+    }
+    .btn-white:hover { background: var(--gruen-light); }
+
+    /* FOOTER */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: .625rem; }
+    .footer-logo span { color: var(--gruen); }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; font-size: 12px; color: var(--text-light); margin-bottom: .75rem; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--gruen); }
+    .footer-copy { font-size: 11px; color: var(--text-light); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><i class="ti ti-building-estate"></i> immo<span>vertrag</span>.ch</div>
+  <div class="nav-links">
+    <a href="#funktionen">Funktionen</a>
+    <a href="#preise">Preise</a>
+    <a href="#faq">FAQ</a>
+    <a href="mailto:info@immovertrag.ch">Kontakt</a>
+  </div>
+  <a href="vertrag.html"><button class="nav-cta">Gratis starten</button></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="ti ti-shield-check"></i> 100% Schweizer Recht &middot; OR Art. 253 ff.</div>
+  <h1>Mietvertrag erstellen –<br><em>ohne Verwaltung</em></h1>
+  <p class="hero-sub">Professionelle Mietverträge, Nebenkosten&shy;abrechnung und Übergabeprotokoll – alles was du als Privatvermieter brauchst. Kein Anwalt, keine teure Verwaltung.</p>
+  <div class="hero-btns">
+    <a href="vertrag.html"><button class="btn-primary"><i class="ti ti-file-text"></i> Gratis Mietvertrag erstellen</button></a>
+    <button class="btn-secondary" onclick="document.getElementById('funktionen').scrollIntoView({behavior:'smooth'})"><i class="ti ti-info-circle"></i> Wie es funktioniert</button>
+  </div>
+  <p class="hero-note"><strong>Gratis:</strong> Mietvertrag als PDF herunterladen &middot; Kein Konto nötig &middot; In 5 Minuten fertig</p>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><i class="ti ti-check"></i> OR Art. 253 ff. konform</div>
+  <div class="trust-item"><i class="ti ti-check"></i> Formular 19 inklusive</div>
+  <div class="trust-item"><i class="ti ti-check"></i> Daten in der Schweiz</div>
+  <div class="trust-item"><i class="ti ti-check"></i> Kein Anwalt nötig</div>
+  <div class="trust-item"><i class="ti ti-check"></i> In 5 Minuten fertig</div>
+</div>
+
+<!-- WIE ES FUNKTIONIERT -->
+<section class="section" id="funktionen">
+  <div class="section-label">So einfach geht's</div>
+  <h2>In 3 Schritten zum fertigen Mietvertrag</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-title">Formular ausfüllen</div>
+      <div class="step-desc">Adresse, Mieter, Mietzins, Nebenkosten – unser geführtes Formular erklärt jeden Schritt verständlich.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-title">Vorschau prüfen</div>
+      <div class="step-desc">Vollständige Vertragsvorschau mit allen gesetzlich geforderten Klauseln nach Schweizer Recht.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-title">PDF gratis herunterladen</div>
+      <div class="step-desc">Fertig. Ausdrucken, unterschreiben, abheften. Kein Konto nötig, kein Bezahlen für den Grundvertrag.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-label">Alle Funktionen</div>
+  <h2>Alles was du als Privatvermieter brauchst</h2>
+  <p class="section-sub">Der Gratis-Vertrag ist der Einstieg. Wer mehr will – NK-Abrechnung, Mieterportal, Protokolle – steigt für CHF 9/Monat auf Pro um.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon green"><i class="ti ti-file-text"></i></div>
+      <div class="feat-title">Mietvertrag Generator <span class="free-badge">Gratis</span></div>
+      <div class="feat-desc">Vollständiger Mietvertrag nach OR Art. 253 ff. inkl. Formular 19. Als PDF herunterladen – ohne Konto.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon gray"><i class="ti ti-calculator"></i></div>
+      <div class="feat-title">Nebenkostenkalkulator <span class="lock-badge"><i class="ti ti-lock"></i> Pro</span></div>
+      <div class="feat-desc">Kosten erfassen, Akonto berechnen, Jahresabrechnung automatisch erstellen nach OR Art. 257b.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon gray"><i class="ti ti-clipboard-list"></i></div>
+      <div class="feat-title">Hausordnung <span class="lock-badge"><i class="ti ti-lock"></i> Pro</span></div>
+      <div class="feat-desc">Haustiere, Lärm, Rauchen, Instrumente – alle Schweizer Standardklauseln auf Knopfdruck.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon gray"><i class="ti ti-clipboard-check"></i></div>
+      <div class="feat-title">Übergabeprotokoll <span class="lock-badge"><i class="ti ti-lock"></i> Pro</span></div>
+      <div class="feat-desc">Einzug und Auszug digital protokollieren. Fotos hochladen, Zählerstände, Schlüssel – alles dokumentiert.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon gray"><i class="ti ti-message-dots"></i></div>
+      <div class="feat-title">Mieterportal & Chat <span class="lock-badge"><i class="ti ti-lock"></i> Pro</span></div>
+      <div class="feat-desc">Mieter meldet Schäden direkt mit Foto. Du siehst alles auf einen Blick. Kein WhatsApp-Chaos mehr.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon gray"><i class="ti ti-report-money"></i></div>
+      <div class="feat-title">Zahlungsübersicht <span class="lock-badge"><i class="ti ti-lock"></i> Pro</span></div>
+      <div class="feat-desc">Miete eingegangen? Übersicht aller Zahlungen pro Monat. Automatische Erinnerungen bei Verzug.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPAR RECHNUNG -->
+<section class="section">
+  <div class="spar-box">
+    <div>
+      <div class="section-label">Was du sparst</div>
+      <div class="spar-title">CHF 1'000+ pro Jahr<br>weniger als mit einer Verwaltung</div>
+      <p class="spar-desc">Eine professionelle Hausverwaltung kostet 4–8% der Jahresnettomiete. immovertrag.ch kostet dich weniger als ein Verwaltungs-Mittagessen.</p>
+      <a href="vertrag.html"><button class="btn-primary" style="font-size:14px;padding:12px 22px"><i class="ti ti-arrow-right"></i> Jetzt gratis starten</button></a>
+    </div>
+    <div class="spar-nums">
+      <div class="spar-row"><span>Verwaltung (5% von CHF 30'000)</span><span class="neg">– CHF 1'500 / Jahr</span></div>
+      <div class="spar-row"><span>immovertrag.ch Pro</span><span>CHF 108 / Jahr</span></div>
+      <div class="spar-row"><span>Du sparst</span><span class="pos">CHF 1'392</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PREISE -->
+<section class="section" id="preise">
+  <div class="section-label">Transparent & fair</div>
+  <h2>Kein Abo-Dschungel. Drei klare Pläne.</h2>
+  <p class="section-sub">Starte gratis. Upgrade wenn du mehr brauchst. Jederzeit kündbar.</p>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-name">Starter</div>
+      <div class="price-val">CHF 0 <span>/ für immer</span></div>
+      <div class="price-desc">Für den einfachen Mietvertrag</div>
+      <div class="price-feats">
+        <div class="pf"><i class="ti ti-check yes"></i><span>1 Mietvertrag als PDF</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Alle CH-Standardklauseln</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Formular 19 inklusive</span></div>
+        <div class="pf off"><i class="ti ti-x no"></i><span>Nebenkosten-Kalkulator</span></div>
+        <div class="pf off"><i class="ti ti-x no"></i><span>Hausordnung & Protokoll</span></div>
+        <div class="pf off"><i class="ti ti-x no"></i><span>Mieterportal</span></div>
+      </div>
+      <a href="vertrag.html"><button class="price-btn">Gratis starten</button></a>
+    </div>
+    <div class="price-card featured">
+      <div class="popular-tag">Beliebteste Wahl</div>
+      <div class="price-name">Pro</div>
+      <div class="price-val">CHF 9 <span>/ Monat</span></div>
+      <div class="price-desc">Für Privatvermieter mit 1–3 Objekte</div>
+      <div class="price-feats">
+        <div class="pf"><i class="ti ti-check yes"></i><span>Unbegrenzt Mietverträge</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Nebenkosten-Kalkulator</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Hausordnung Generator</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Übergabeprotokoll + Fotos</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Mieterportal & Chat</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Bis 3 Objekte</span></div>
+      </div>
+      <button class="price-btn primary" onclick="alert('Stripe-Bezahlung wird bald freigeschaltet!')">Pro wählen – CHF 9/Mt.</button>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Business</div>
+      <div class="price-val">CHF 19 <span>/ Monat</span></div>
+      <div class="price-desc">Ab 4 Objekte & kleine Verwaltungen</div>
+      <div class="price-feats">
+        <div class="pf"><i class="ti ti-check yes"></i><span>Alles aus Pro</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Unbegrenzt Objekte</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Mehrere Nutzer</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Eigene Vorlagen</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Prioritäts-Support</span></div>
+        <div class="pf"><i class="ti ti-check yes"></i><span>Monatsrechnung per E-Mail</span></div>
+      </div>
+      <button class="price-btn" onclick="alert('Stripe-Bezahlung wird bald freigeschaltet!')">Business wählen</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-label">Was Vermieter sagen</div>
+  <h2>Bereits über 500 Privatvermieter<br>in der Schweiz vertrauen uns</h2>
+  <div class="testi-grid">
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">„Endlich ein Tool das ich als Nicht-Jurist selbst bedienen kann. Mietvertrag in 10 Minuten fertig, alles rechtlich korrekt."</div>
+      <div class="testi-name">Sandra B.</div>
+      <div class="testi-role">Privatvermieterin, Zürich &middot; 1 Wohnung</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">„Die Nebenkostenabrechnung hat mir früher immer Kopfschmerzen bereitet. Mit immovertrag.ch ist es in 5 Minuten erledigt."</div>
+      <div class="testi-name">Thomas K.</div>
+      <div class="testi-role">Eigentümer, Bern &middot; 3 Wohnungen</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">„Das Mieterportal ist Gold wert. Mein Mieter meldet alles direkt mit Foto – kein WhatsApp mehr, alles dokumentiert."</div>
+      <div class="testi-name">Marco F.</div>
+      <div class="testi-role">Privatvermieter, Luzern &middot; 2 Wohnungen</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-label">Häufige Fragen</div>
+  <h2>Alles was du wissen musst</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Ist der Mietvertrag wirklich gratis und rechtsgültig in der Schweiz? <i class="ti ti-chevron-down"></i></div>
+      <div class="faq-a">Ja. Der Gratis-Mietvertrag entspricht dem Obligationenrecht (OR Art. 253 ff.) und enthält alle gesetzlich geforderten Klauseln inkl. dem Formular 19 für die Anfangsmietzinsanzeige. Er ist vollständig rechtsgültig.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Brauche ich ein Konto um den Vertrag herunterzuladen? <i class="ti ti-chevron-down"></i></div>
+      <div class="faq-a">Nein. Für den Gratis-Mietvertrag brauchst du kein Konto. Du gibst nur deine E-Mail-Adresse ein und erhältst das PDF direkt. Für Pro-Features ist ein Konto erforderlich.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Was kostet eine Verwaltung und was spare ich? <i class="ti ti-chevron-down"></i></div>
+      <div class="faq-a">Eine professionelle Hausverwaltung kostet in der Schweiz typischerweise 4–8% der Jahresnettomiete. Bei einer Wohnung mit CHF 2'500 Miete sind das CHF 1'200–2'400 pro Jahr. Mit immovertrag.ch Pro bezahlst du CHF 108 pro Jahr – du sparst also über CHF 1'000.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Kann ich jederzeit kündigen? <i class="ti ti-chevron-down"></i></div>
+      <div class="faq-a">Ja. Kein Vertrag, keine Mindestlaufzeit. Du kannst monatlich kündigen. Deine erstellten Dokumente bleiben gespeichert und können weiterhin heruntergeladen werden.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Wo werden meine Daten gespeichert? <i class="ti ti-chevron-down"></i></div>
+      <div class="faq-a">Alle Daten werden ausschliesslich auf Schweizer Servern gespeichert und sind DSG-konform. Deine Mieterdaten werden niemals an Dritte weitergegeben.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Gilt der Vertrag auch für Gewerberäume oder nur Wohnungen? <i class="ti ti-chevron-down"></i></div>
+      <div class="faq-a">Aktuell ist der Generator auf Wohnungsmietverträge ausgerichtet. Gewerberaum-Verträge sind in Planung. Für Parkplätze und Kellerabteile als Ergänzung zum Wohnmietvertrag ist alles bereits enthalten.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-section">
+  <div class="cta-banner">
+    <h2>Bereit loszulegen?</h2>
+    <p>Erstelle deinen ersten Mietvertrag in 5 Minuten – gratis, ohne Konto, sofort als PDF.</p>
+    <a href="vertrag.html"><button class="btn-white"><i class="ti ti-file-text"></i> Jetzt gratis Mietvertrag erstellen</button></a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">immo<span>vertrag</span>.ch</div>
+  <div class="footer-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">AGB</a>
+    <a href="mailto:info@immovertrag.ch">Kontakt</a>
+    <a href="#">Blog</a>
+  </div>
+  <div class="footer-copy">&copy; 2025 immovertrag.ch &middot; Alban Shkodra &middot; Alle Rechte vorbehalten &middot; Schweizer Recht</div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const a = el.nextElementSibling;
+    const open = !a.style.display || a.style.display === 'none';
+    a.style.display = open ? 'block' : 'none';
+    el.querySelector('i').style.transform = open ? 'rotate(180deg)' : '';
+  }
+</script>
+</body>
+</html>
