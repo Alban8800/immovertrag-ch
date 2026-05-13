@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mietvertrag erstellen – immovertrag.ch</title>
   <meta name="description" content="Mietvertrag nach Schweizer Recht online erstellen und gratis als PDF herunterladen." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
@@ -12,25 +13,19 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --gruen: #1D9E75; --gruen-dark: #0F6E56; --gruen-light: #E1F5EE;
+      --gruen: #1D9E75; --gruen-dark: #0F6E56; --gruen-light: #E1F5EE; --gruen-mid: #9FE1CB;
       --text: #0e1c14; --text-mid: #3d5247; --text-light: #7a9488;
       --bg: #f7f9f7; --white: #ffffff; --border: #dce8e2;
     }
+    html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); font-size: 15px; }
-
-    /* NAV */
-    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
-    .nav-logo span { color: var(--gruen); }
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-back { font-size: 13px; color: var(--text-mid); display: flex; align-items: center; gap: 5px; text-decoration: none; }
     .nav-back:hover { color: var(--gruen); }
-
-    /* LAYOUT */
     .page { max-width: 820px; margin: 0 auto; padding: 2rem; }
     .page-title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; margin-bottom: .375rem; }
     .page-sub { font-size: 14px; color: var(--text-mid); margin-bottom: 2rem; }
-
-    /* STEP BAR */
     .stepbar { display: flex; align-items: center; margin-bottom: 2.5rem; overflow-x: auto; padding-bottom: 4px; }
     .step { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
     .sn { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; border: 1px solid var(--border); background: var(--white); color: var(--text-light); transition: all 0.2s; }
@@ -38,46 +33,38 @@
     .sn.done { background: var(--gruen); color: #fff; border-color: var(--gruen); }
     .sl { font-size: 12px; color: var(--text-light); white-space: nowrap; }
     .sl.active { color: var(--text); font-weight: 500; }
-    .sline { width: 28px; height: 1px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
-
-    /* FORM PANELS */
+    .sline { width: 24px; height: 1px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
     .panel { display: none; animation: fadeIn 0.3s ease; }
     .panel.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
     .card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1rem; }
-    .card-title { font-size: 14px; font-weight: 500; color: var(--text-mid); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 7px; padding-bottom: .75rem; border-bottom: 1px solid var(--border); }
+    .card-title { font-size: 14px; font-weight: 500; color: var(--text-mid); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 7px; padding-bottom: .75rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
     .card-title i { color: var(--gruen); font-size: 17px; }
-
+    .new-badge { font-size: 10px; background: var(--gruen-light); color: var(--gruen-dark); padding: 2px 7px; border-radius: 20px; font-weight: 500; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .fg { display: flex; flex-direction: column; gap: 5px; }
     .fg.full { grid-column: 1 / -1; }
+    .fg.third { grid-column: span 1; }
     @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } .fg.full { grid-column: 1; } }
     label { font-size: 12px; color: var(--text-mid); font-weight: 500; }
     label span { color: #ccc; font-weight: 400; font-size: 11px; }
-    input, select, textarea {
-      width: 100%; padding: 9px 12px; font-size: 13px;
-      border: 1px solid var(--border); border-radius: 7px;
-      background: var(--white); color: var(--text); font-family: 'DM Sans', sans-serif;
-      transition: border-color 0.15s;
-    }
+    input, select, textarea { width: 100%; padding: 9px 12px; font-size: 13px; border: 1px solid var(--border); border-radius: 7px; background: var(--white); color: var(--text); font-family: 'DM Sans', sans-serif; transition: border-color 0.15s; }
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gruen); box-shadow: 0 0 0 3px rgba(29,158,117,0.1); }
     textarea { resize: vertical; min-height: 70px; }
     .checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 5px 0; cursor: pointer; }
     .checkbox-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--gruen); flex-shrink: 0; }
-
-    /* TOTAL BOX */
+    .nk-grid { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .nk-grid:last-child { border-bottom: none; }
+    .nk-grid label { font-size: 12px; margin: 0; }
+    .nk-grid select { width: 100px; padding: 6px 8px; font-size: 12px; }
+    .nk-grid input { width: 90px; padding: 6px 8px; font-size: 12px; text-align: right; }
     .total-box { background: var(--gruen-light); border: 1px solid var(--gruen-mid); border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; }
     .total-row { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; }
     .total-row.big { font-weight: 500; font-size: 16px; color: var(--gruen-dark); border-top: 1px solid var(--gruen-mid); margin-top: 8px; padding-top: 10px; }
-
-    /* INFO BOX */
     .info { background: var(--gruen-light); border: 1px solid #9FE1CB; border-radius: 8px; padding: .75rem 1rem; font-size: 12px; color: #085041; margin-bottom: 1rem; display: flex; gap: 8px; align-items: flex-start; }
     .info i { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
     .warn { background: #FAEEDA; border: 1px solid #FAC775; border-radius: 8px; padding: .75rem 1rem; font-size: 12px; color: #633806; margin-bottom: 1rem; display: flex; gap: 8px; align-items: flex-start; }
     .warn i { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-
-    /* NAV BUTTONS */
     .nav-btns { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
     .btn { padding: 10px 22px; font-size: 14px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); background: var(--white); color: var(--text); font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
     .btn:hover { border-color: var(--gruen); color: var(--gruen); }
@@ -86,37 +73,24 @@
     .btn.primary { background: var(--gruen); color: #fff; border-color: var(--gruen); }
     .btn.primary:hover { background: var(--gruen-dark); border-color: var(--gruen-dark); color: #fff; }
     .step-ind { font-size: 12px; color: var(--text-light); }
-
-    /* PREVIEW */
     .preview-doc { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 2rem; font-size: 13px; line-height: 1.9; max-height: 420px; overflow-y: auto; margin-bottom: 1.25rem; }
     .preview-doc h2 { font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 4px; }
     .preview-doc .subdoc { font-size: 11px; text-align: center; color: var(--text-light); margin-bottom: 1.5rem; }
     .preview-doc h3 { font-size: 13px; font-weight: 600; margin: 1.25rem 0 .5rem; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
-    .preview-doc p { margin-bottom: .5rem; color: var(--text-mid); }
+    .preview-doc p { margin-bottom: .5rem; color: var(--text-mid); font-size: 12px; }
     .preview-row { display: flex; gap: 8px; font-size: 12px; padding: 2px 0; }
-    .preview-row span:first-child { color: var(--text-light); min-width: 160px; flex-shrink: 0; }
+    .preview-row span:first-child { color: var(--text-light); min-width: 170px; flex-shrink: 0; }
     .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
     .sig-line { border-top: 1px solid var(--border); padding-top: 6px; font-size: 11px; color: var(--text-light); }
-
-    /* EMAIL GATE */
     .email-gate { background: var(--white); border: 2px solid var(--gruen); border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 1.25rem; }
     .email-gate h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: .5rem; }
     .email-gate p { font-size: 13px; color: var(--text-mid); margin-bottom: 1.25rem; }
     .email-input-row { display: flex; gap: 8px; max-width: 400px; margin: 0 auto; }
     .email-input-row input { flex: 1; }
-
-    /* SUCCESS */
     .success-box { background: var(--gruen-light); border: 1px solid #9FE1CB; border-radius: 12px; padding: 2rem; text-align: center; }
     .success-box i { font-size: 48px; color: var(--gruen); display: block; margin-bottom: 1rem; }
     .success-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: .5rem; color: var(--gruen-dark); }
     .success-box p { font-size: 13px; color: #085041; margin-bottom: 1.25rem; }
-
-    /* PRO LOCK */
-    .pro-lock { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1rem; }
-    .pro-lock i { font-size: 36px; color: var(--text-light); display: block; margin-bottom: .75rem; }
-    .pro-lock h3 { font-size: 16px; font-weight: 500; margin-bottom: .5rem; }
-    .pro-lock p { font-size: 13px; color: var(--text-mid); margin-bottom: 1.25rem; }
-    .pro-btn { background: var(--gruen); color: #fff; padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-65TGMDTE4Q"></script>
@@ -130,15 +104,16 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo"><i class="ti ti-building-estate"></i> immo<span>vertrag</span>.ch</a>
-  <a href="index.html" class="nav-back"><i class="ti ti-arrow-left"></i> Zurück zur Startseite</a>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="immovertrag.ch" style="height:36px;width:auto" />
+  </a>
+  <a href="index.html" class="nav-back"><i class="ti ti-arrow-left"></i> Zurück</a>
 </nav>
 
 <div class="page">
   <div class="page-title">Mietvertrag erstellen</div>
   <div class="page-sub">Schweizer Recht &middot; OR Art. 253 ff. &middot; Formular 19 inklusive &middot; Gratis PDF</div>
 
-  <!-- STEP BAR -->
   <div class="stepbar">
     <div class="step"><div class="sn active" id="sn1">1</div><div class="sl active" id="sl1">Objekt</div></div>
     <div class="sline"></div>
@@ -148,9 +123,11 @@
     <div class="sline"></div>
     <div class="step"><div class="sn" id="sn4">4</div><div class="sl" id="sl4">Finanzen</div></div>
     <div class="sline"></div>
-    <div class="step"><div class="sn" id="sn5">5</div><div class="sl" id="sl5">Konditionen</div></div>
+    <div class="step"><div class="sn" id="sn5">5</div><div class="sl" id="sl5">Nebenkosten</div></div>
     <div class="sline"></div>
-    <div class="step"><div class="sn" id="sn6">6</div><div class="sl" id="sl6">PDF &amp; Download</div></div>
+    <div class="step"><div class="sn" id="sn6">6</div><div class="sl" id="sl6">Konditionen</div></div>
+    <div class="sline"></div>
+    <div class="step"><div class="sn" id="sn7">7</div><div class="sl" id="sl7">PDF</div></div>
   </div>
 
   <!-- STEP 1: OBJEKT -->
@@ -170,10 +147,15 @@
           </select>
         </div>
         <div class="fg"><label>Wohnfläche (m²) <span>optional</span></label><input type="number" id="obj-flaeche" placeholder="78" /></div>
+        <div class="fg"><label>Objekttyp</label>
+          <select id="obj-typ">
+            <option selected>Wohnung</option><option>Einfamilienhaus</option><option>Zimmer (möbliert)</option><option>Zimmer (unmöbliert)</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><i class="ti ti-list-check"></i> Eingeschlossene Räume</div>
+      <div class="card-title"><i class="ti ti-list-check"></i> Eingeschlossene Räume & Nebenräume</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
         <label class="checkbox-row"><input type="checkbox" id="inc-keller" checked /> Kellerabteil</label>
         <label class="checkbox-row"><input type="checkbox" id="inc-estrich" /> Estrichabteil</label>
@@ -181,12 +163,18 @@
         <label class="checkbox-row"><input type="checkbox" id="inc-waschk" checked /> Waschküche (Mitbenutzung)</label>
         <label class="checkbox-row"><input type="checkbox" id="inc-garten" /> Garten / Sitzplatz</label>
         <label class="checkbox-row"><input type="checkbox" id="inc-velo" /> Veloraum</label>
+        <label class="checkbox-row"><input type="checkbox" id="inc-mansarde" /> Mansarde</label>
+        <label class="checkbox-row"><input type="checkbox" id="inc-terrasse" /> Terrasse / Balkon</label>
       </div>
       <div class="form-grid" style="margin-top:1rem">
         <div class="fg"><label>Parkplatz Typ</label>
-          <select id="pp-typ"><option>Kein Parkplatz</option><option selected>Aussenabstellplatz</option><option>Einstellhalle</option><option>Carport</option></select>
+          <select id="pp-typ"><option>Kein Parkplatz</option><option selected>Aussenabstellplatz</option><option>Einstellhalle</option><option>Carport</option><option>Tiefgarage</option></select>
         </div>
         <div class="fg"><label>Parkplatz Nummer <span>optional</span></label><input type="text" id="pp-nr" placeholder="PP Nr. 7" /></div>
+        <div class="fg"><label>Anzahl Schlüssel Haustür</label><input type="number" id="key-haus" value="1" min="0" max="10" /></div>
+        <div class="fg"><label>Anzahl Schlüssel Wohnung</label><input type="number" id="key-whg" value="2" min="0" max="10" /></div>
+        <div class="fg"><label>Schlüssel Keller/Estrich</label><input type="number" id="key-keller" value="1" min="0" max="10" /></div>
+        <div class="fg"><label>Schlüssel Briefkasten</label><input type="number" id="key-brief" value="1" min="0" max="10" /></div>
       </div>
     </div>
   </div>
@@ -203,8 +191,9 @@
         <div class="fg"><label>Ort</label><input type="text" id="vm-ort" placeholder="Zürich" /></div>
         <div class="fg"><label>Telefon</label><input type="text" id="vm-tel" placeholder="+41 79 000 00 00" /></div>
         <div class="fg"><label>E-Mail</label><input type="email" id="vm-email" placeholder="max.mueller@email.ch" /></div>
-        <div class="fg"><label>IBAN <span>für Mietzahlungen, optional</span></label><input type="text" id="vm-iban" placeholder="CH00 0000 0000 0000 0000 0" /></div>
+        <div class="fg"><label>IBAN <span>für Mietzahlungen</span></label><input type="text" id="vm-iban" placeholder="CH00 0000 0000 0000 0000 0" /></div>
         <div class="fg"><label>Kontoinhaber</label><input type="text" id="vm-kto" placeholder="Max Müller" /></div>
+        <div class="fg"><label>Bank / Post</label><input type="text" id="vm-bank" placeholder="UBS / PostFinance" /></div>
       </div>
     </div>
   </div>
@@ -219,105 +208,193 @@
         <div class="fg full"><label>Bisherige Adresse</label><input type="text" id="mt-strasse" placeholder="Bisherstrasse 3, 8003 Zürich" /></div>
         <div class="fg"><label>Telefon</label><input type="text" id="mt-tel" placeholder="+41 79 111 11 11" /></div>
         <div class="fg"><label>E-Mail</label><input type="email" id="mt-email" placeholder="hans.muster@email.ch" /></div>
-        <div class="fg"><label>Geburtsdatum</label><input type="date" id="mt-geb" /></div>
-        <div class="fg"><label>Nationalität</label><input type="text" id="mt-nat" placeholder="Schweiz" /></div>
+        <div class="fg"><label>Geburtsdatum <span>optional</span></label><input type="date" id="mt-geb" /></div>
+        <div class="fg"><label>Nationalität <span>optional</span></label><input type="text" id="mt-nat" placeholder="Schweiz" /></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><i class="ti ti-user-plus"></i> Zweite Mietperson <span style="font-size:11px;font-weight:400;color:var(--text-light)">(optional)</span></div>
+      <div class="card-title"><i class="ti ti-user-plus"></i> Ehegatte/in / Mitmieter/in <span class="new-badge">Neu</span><span style="font-size:11px;font-weight:400;color:var(--text-light)">(optional)</span></div>
       <div class="form-grid">
-        <div class="fg"><label>Vorname</label><input type="text" id="mt2-vorname" placeholder="Optional" /></div>
-        <div class="fg"><label>Nachname</label><input type="text" id="mt2-name" placeholder="Optional" /></div>
+        <div class="fg"><label>Vorname Ehegatte/in</label><input type="text" id="eh-vorname" placeholder="Optional" /></div>
+        <div class="fg"><label>Nachname Ehegatte/in</label><input type="text" id="eh-name" placeholder="Optional" /></div>
+        <div class="fg"><label>Vorname Mitmieter/in</label><input type="text" id="mt2-vorname" placeholder="Optional" /></div>
+        <div class="fg"><label>Nachname Mitmieter/in</label><input type="text" id="mt2-name" placeholder="Optional" /></div>
       </div>
+      <div class="info" style="margin-top:1rem"><i class="ti ti-info-circle"></i><span>Bei Mitmietverträgen müssen alle Mietparteien den Vertrag unterzeichnen. Die Kündigung einer Familienwohnung erfordert die Zustimmung beider Eheleute.</span></div>
     </div>
   </div>
 
   <!-- STEP 4: FINANZEN -->
   <div class="panel" id="step4">
-    <div class="info"><i class="ti ti-info-circle"></i><span>Nach CH Mietrecht (OR Art. 257b) müssen Nebenkosten separat als Akonto oder Pauschale vereinbart werden.</span></div>
     <div class="card">
       <div class="card-title"><i class="ti ti-coin"></i> Mietzins</div>
       <div class="form-grid">
         <div class="fg"><label>Nettomiete / Monat (CHF)</label><input type="number" id="fin-miete" value="2500" oninput="calcTotal()" /></div>
-        <div class="fg"><label>Nebenkosten / Monat (CHF)</label>
-          <div style="display:flex;gap:6px">
-            <input type="number" id="fin-nk" value="250" oninput="calcTotal()" style="flex:1" />
-            <select id="fin-nk-typ" style="width:100px"><option selected>Akonto</option><option>Pauschale</option></select>
-          </div>
-        </div>
-        <div class="fg"><label>Parkplatz / Monat (CHF)</label><input type="number" id="fin-pp" value="100" oninput="calcTotal()" /></div>
+        <div class="fg"><label>Parkplatz / Monat (CHF)</label><input type="number" id="fin-pp" value="0" oninput="calcTotal()" /></div>
         <div class="fg"><label>Zahlbar jeweils am</label>
           <select id="fin-faellig"><option selected>1. des Monats</option><option>15. des Monats</option><option>Letzten des Vormonats</option></select>
         </div>
-      </div>
-      <div class="total-box">
-        <div class="total-row"><span>Nettomiete</span><span>CHF <span id="t-miete">2'500</span></span></div>
-        <div class="total-row"><span>Nebenkosten (Akonto)</span><span>CHF <span id="t-nk">250</span></span></div>
-        <div class="total-row"><span>Parkplatz</span><span>CHF <span id="t-pp">100</span></span></div>
-        <div class="total-row big"><span>Total monatlich</span><span>CHF <span id="t-total">2'850</span></span></div>
+        <div class="fg"><label>Bankverbindung Empfänger</label><input type="text" id="fin-empf" placeholder="Name der Bank / PostFinance" /></div>
       </div>
     </div>
     <div class="card">
       <div class="card-title"><i class="ti ti-safe"></i> Kaution (Mieterdepot)</div>
       <div class="form-grid">
         <div class="fg"><label>Kautionsbetrag (CHF) <span style="color:#854F0B">max. 3 Monatsmieten</span></label><input type="number" id="fin-kaution" value="7500" /></div>
+        <div class="fg"><label>Kaution fällig bei</label>
+          <select id="fin-kaution-faellig"><option selected>Vertragsunterzeichnung</option><option>Mietantritt</option><option>Anderem Datum</option></select>
+        </div>
         <div class="fg"><label>Kautionsart</label>
           <select id="fin-kaution-typ"><option selected>Mietkautionskonto (Bank)</option><option>Mietkautionsversicherung</option><option>Bankgarantie</option></select>
         </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><i class="ti ti-percentage"></i> Referenzzinssatz</div>
-      <div class="warn"><i class="ti ti-alert-triangle"></i><span>Der Referenzzinssatz muss auf dem Formular 19 (Anfangsmietzinsanzeige) angegeben werden – gesetzlich vorgeschrieben.</span></div>
+      <div class="card-title"><i class="ti ti-percentage"></i> Berechnungsgrundlagen <span class="new-badge">Neu</span></div>
+      <div class="warn"><i class="ti ti-alert-triangle"></i><span>Der Referenzzinssatz und LIK-Indexstand sind Grundlage für spätere Mietzinsanpassungen (OR Art. 269a). Sie müssen auf dem Formular 19 angegeben werden.</span></div>
       <div class="form-grid">
         <div class="fg"><label>Aktueller Referenzzinssatz (%)</label><input type="number" id="fin-refzins" step="0.25" value="1.75" /></div>
-        <div class="fg"><label>Indexstand (LIK) <span>optional</span></label><input type="text" id="fin-index" placeholder="z.B. 105.3" /></div>
+        <div class="fg"><label>LIK-Indexstand (Punkte)</label><input type="text" id="fin-index" placeholder="z.B. 105.3" /></div>
+        <div class="fg"><label>Indexbasis (= 100 Punkte)</label><input type="text" id="fin-indexbasis" placeholder="z.B. Dezember 2020" /></div>
+        <div class="fg"><label>Kostensteigerungen abgegolten bis</label><input type="text" id="fin-abgegolten" placeholder="z.B. März 2025" /></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-alert-circle"></i> Mietzinsvorbehalt <span class="new-badge">Neu</span><span style="font-size:11px;font-weight:400;color:var(--text-light)">(nur ausfüllen wenn Miete nicht kostendeckend)</span></div>
+      <div class="form-grid">
+        <div class="fg"><label>Vorbehalt in CHF oder % <span>leer lassen wenn nicht zutreffend</span></label><input type="text" id="fin-vorbehalt" placeholder="z.B. CHF 200 oder 10%" /></div>
+        <div class="fg full"><label>Begründung Vorbehalt <span>optional</span></label><textarea id="fin-vorbehalt-grund" placeholder="z.B. Hypothekarzins übersteigt Referenzzinssatz..."></textarea></div>
       </div>
     </div>
   </div>
 
-  <!-- STEP 5: KONDITIONEN -->
+  <!-- STEP 5: NEBENKOSTEN (NEU) -->
   <div class="panel" id="step5">
+    <div class="info"><i class="ti ti-info-circle"></i><span>Nebenkosten müssen im Vertrag einzeln aufgeführt sein (OR Art. 257b). Nur explizit aufgeführte Kosten dürfen verrechnet werden. Akonto = jährliche Abrechnung; Pauschale = kein Nachweis nötig.</span></div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-flame"></i> Nebenkosten einzeln <span class="new-badge">Neu</span></div>
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);margin-bottom:6px">
+        <div style="font-size:11px;font-weight:500;color:var(--text-light)">Kostenart</div>
+        <div style="font-size:11px;font-weight:500;color:var(--text-light);width:100px;text-align:center">Typ</div>
+        <div style="font-size:11px;font-weight:500;color:var(--text-light);width:90px;text-align:right">CHF/Mt.</div>
+      </div>
+      <div class="nk-grid">
+        <label>Heizung / Fernwärme</label>
+        <select id="nk-heizung-typ"><option selected>Akonto</option><option>Pauschale</option><option>Nicht verrechnet</option></select>
+        <input type="number" id="nk-heizung" value="120" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Warmwasser / Abwasser</label>
+        <select id="nk-wasser-typ"><option selected>Akonto</option><option>Pauschale</option><option>Nicht verrechnet</option></select>
+        <input type="number" id="nk-wasser" value="40" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Allgemeinstrom</label>
+        <select id="nk-strom-typ"><option>Akonto</option><option selected>Pauschale</option><option>Nicht verrechnet</option></select>
+        <input type="number" id="nk-strom" value="20" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Gas</label>
+        <select id="nk-gas-typ"><option>Akonto</option><option>Pauschale</option><option selected>Nicht verrechnet</option></select>
+        <input type="number" id="nk-gas" value="0" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Internet / Radio / TV</label>
+        <select id="nk-internet-typ"><option>Akonto</option><option selected>Pauschale</option><option>Nicht verrechnet</option></select>
+        <input type="number" id="nk-internet" value="30" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Entsorgungsgebühren</label>
+        <select id="nk-entsorgung-typ"><option>Akonto</option><option selected>Pauschale</option><option>Nicht verrechnet</option></select>
+        <input type="number" id="nk-entsorgung" value="15" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Hauswartung</label>
+        <select id="nk-hauswart-typ"><option selected>Akonto</option><option>Pauschale</option><option>Nicht verrechnet</option></select>
+        <input type="number" id="nk-hauswart" value="25" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="nk-grid">
+        <label>Weitere <span style="font-size:11px;font-weight:400">(optional)</span></label>
+        <select id="nk-weitere-typ"><option>Akonto</option><option>Pauschale</option><option selected>Nicht verrechnet</option></select>
+        <input type="number" id="nk-weitere" value="0" oninput="calcNK()" placeholder="0" />
+      </div>
+      <div class="total-box" style="margin-top:1rem">
+        <div class="total-row"><span>Nettomiete</span><span>CHF <span id="t-miete2">2'500</span></span></div>
+        <div class="total-row"><span>Nebenkosten total</span><span>CHF <span id="t-nk-total">250</span></span></div>
+        <div class="total-row"><span>Parkplatz</span><span>CHF <span id="t-pp2">0</span></span></div>
+        <div class="total-row big"><span>Gesamtmiete monatlich</span><span>CHF <span id="t-gesamt">2'750</span></span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-calendar"></i> Nebenkosten-Abrechnung <span class="new-badge">Neu</span></div>
+      <div class="form-grid">
+        <div class="fg"><label>Abrechnungsstichtag</label>
+          <select id="nk-stichtag"><option selected>30. Juni</option><option>31. Dezember</option><option>31. März</option><option>30. September</option></select>
+        </div>
+        <div class="fg"><label>Nachzahlung/Rückerstattung fällig nach</label>
+          <select id="nk-frist"><option selected>30 Tagen</option><option>60 Tagen</option></select>
+        </div>
+      </div>
+      <div class="info" style="margin-top:.75rem"><i class="ti ti-info-circle"></i><span>Bei Auszug während der Abrechnungsperiode werden Heizkosten anteilsmässig nach gesetzlichem Verteilschlüssel abgerechnet.</span></div>
+    </div>
+  </div>
+
+  <!-- STEP 6: KONDITIONEN -->
+  <div class="panel" id="step6">
     <div class="card">
       <div class="card-title"><i class="ti ti-calendar"></i> Mietbeginn & Laufzeit</div>
       <div class="form-grid">
-        <div class="fg"><label>Mietbeginn</label><input type="date" id="kond-beginn" value="2025-01-01" /></div>
+        <div class="fg"><label>Mietbeginn</label><input type="date" id="kond-beginn" /></div>
         <div class="fg"><label>Laufzeit</label>
           <select id="kond-laufzeit" onchange="toggleBefristet()"><option selected>Unbefristet</option><option>Befristet</option></select>
         </div>
         <div class="fg" id="kond-bis-wrap" style="display:none"><label>Mietende (befristet bis)</label><input type="date" id="kond-bis" /></div>
         <div class="fg"><label>Kündigungsfrist</label>
-          <select id="kond-kfrist"><option>30 Tage auf Ende Monat</option><option selected>3 Monate auf Ende Monat</option><option>6 Monate auf Ende Monat</option></select>
+          <select id="kond-kfrist"><option>30 Tage auf Ende Monat</option><option selected>3 Monate auf Ende Monat</option><option>14 Tage (möbliertes Zimmer)</option><option>6 Monate auf Ende Monat</option></select>
         </div>
         <div class="fg"><label>Kündigungstermine</label>
-          <select id="kond-kterm"><option selected>Auf jeden Monatsende</option><option>31. März / 30. September</option><option>31. März</option></select>
+          <select id="kond-kterm"><option selected>Auf jeden Monatsende</option><option>31. März / 30. September</option><option>31. März</option><option>Ortsübliche Termine</option></select>
         </div>
+        <div class="fg"><label>Übergabedatum</label><input type="date" id="kond-uebergabe" /></div>
       </div>
     </div>
     <div class="card">
       <div class="card-title"><i class="ti ti-clipboard-list"></i> Hausordnung & Bedingungen</div>
       <div class="form-grid">
         <div class="fg"><label>Haustiere</label>
-          <select id="kond-haustier"><option selected>Nicht erlaubt</option><option>Kleintiere erlaubt</option><option>Nur mit schriftl. Bewilligung</option><option>Erlaubt</option></select>
+          <select id="kond-haustier"><option selected>Nicht erlaubt</option><option>Kleintiere erlaubt (Hamster, Vögel, Fische)</option><option>Nur mit schriftl. Bewilligung des Vermieters</option><option>Erlaubt</option></select>
         </div>
         <div class="fg"><label>Rauchen</label>
-          <select id="kond-rauchen"><option selected>Kein Rauchen in der Wohnung</option><option>Nur auf Balkon/Terrasse</option><option>Erlaubt</option></select>
+          <select id="kond-rauchen"><option selected>Kein Rauchen in der Wohnung</option><option>Nur auf Balkon/Terrasse erlaubt</option><option>Erlaubt</option></select>
         </div>
         <div class="fg"><label>Untermiete</label>
-          <select id="kond-untermiete"><option selected>Nicht erlaubt ohne Zustimmung</option><option>Erlaubt mit schriftl. Zustimmung</option></select>
+          <select id="kond-untermiete"><option selected>Nur mit schriftl. Zustimmung (OR Art. 262)</option><option>Nicht erlaubt</option><option>Erlaubt (max. 2 Jahre)</option></select>
         </div>
-        <div class="fg"><label>Anzahl Schlüssel</label><input type="number" id="kond-schluessel" value="2" min="1" max="10" /></div>
-        <div class="fg"><label>Übergabedatum</label><input type="date" id="kond-uebergabe" value="2025-01-01" /></div>
+        <div class="fg"><label>Instrumente / Lärm</label>
+          <select id="kond-laerm"><option selected>Ortsübliche Ruhezeiten gelten</option><option>Keine Musikinstrumente</option><option>Instrumente tagsüber erlaubt</option></select>
+        </div>
       </div>
       <div class="fg" style="margin-top:10px"><label>Zusätzliche Vereinbarungen <span>optional</span></label>
         <textarea id="kond-zusatz" placeholder="z.B. Gartenpflege durch Mieter, spezielle Übergabebedingungen..."></textarea>
       </div>
     </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-files"></i> Integrierende Bestandteile <span class="new-badge">Neu</span></div>
+      <div style="font-size:12px;color:var(--text-mid);margin-bottom:.75rem">Folgende Dokumente sind Bestandteil dieses Vertrags:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+        <label class="checkbox-row"><input type="checkbox" id="beil-hausordnung" checked /> Hausordnung</label>
+        <label class="checkbox-row"><input type="checkbox" id="beil-schluessel" checked /> Schlüsselverzeichnis</label>
+        <label class="checkbox-row"><input type="checkbox" id="beil-uebergabe" checked /> Übernahmeprotokoll</label>
+        <label class="checkbox-row"><input type="checkbox" id="beil-inventar" /> Inventarliste</label>
+        <label class="checkbox-row"><input type="checkbox" id="beil-haustier" /> Regelung Haustierhaltung</label>
+        <label class="checkbox-row"><input type="checkbox" id="beil-reserve" /> Berechnung Mietzinsreserve</label>
+        <label class="checkbox-row"><input type="checkbox" id="beil-besond" /> Besondere Bestimmungen</label>
+      </div>
+    </div>
   </div>
 
-  <!-- STEP 6: PDF & DOWNLOAD -->
-  <div class="panel" id="step6">
-    <!-- EMAIL GATE -->
+  <!-- STEP 7: PDF & DOWNLOAD -->
+  <div class="panel" id="step7">
     <div class="email-gate" id="email-gate">
       <i class="ti ti-file-download" style="font-size:40px;color:var(--gruen);display:block;margin-bottom:1rem"></i>
       <h3>Fast fertig! PDF gratis herunterladen</h3>
@@ -327,11 +404,7 @@
         <button class="btn primary" onclick="downloadPDF()"><i class="ti ti-download"></i> PDF erstellen</button>
       </div>
     </div>
-
-    <!-- PREVIEW -->
     <div class="preview-doc" id="preview-doc"></div>
-
-    <!-- SUCCESS (hidden initially) -->
     <div class="success-box" id="success-box" style="display:none">
       <i class="ti ti-circle-check"></i>
       <h3>Mietvertrag wurde erstellt!</h3>
@@ -341,9 +414,8 @@
         <a href="index.html"><button class="btn"><i class="ti ti-home"></i> Zurück zur Startseite</button></a>
       </div>
     </div>
-
     <div style="margin-top:1.5rem;padding:1.25rem;background:var(--white);border:1px solid var(--border);border-radius:12px">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;display:flex;align-items:center;gap:6px"><i class="ti ti-lock" style="color:var(--gruen)"></i> Mehr Dokumente mit Pro – CHF 9/Monat</div>
+      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;display:flex;align-items:center;gap:6px"><i class="ti ti-lock" style="color:var(--gruen)"></i> Mehr Dokumente mit Pro – ab CHF 9/Monat</div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px;color:var(--text-mid)">
         <div style="display:flex;align-items:center;gap:5px"><i class="ti ti-calculator" style="color:var(--gruen)"></i> Nebenkostenkalkulator</div>
         <div style="display:flex;align-items:center;gap:5px"><i class="ti ti-clipboard-list" style="color:var(--gruen)"></i> Hausordnung Generator</div>
@@ -352,39 +424,51 @@
         <div style="display:flex;align-items:center;gap:5px"><i class="ti ti-report-money" style="color:var(--gruen)"></i> Jahresabrechnung NK</div>
         <div style="display:flex;align-items:center;gap:5px"><i class="ti ti-files" style="color:var(--gruen)"></i> Unbegrenzt Verträge</div>
       </div>
-      <button class="btn primary" style="margin-top:1rem;font-size:13px" onclick="alert('Pro-Abo kommt bald! Wir benachrichtigen dich per E-Mail.')"><i class="ti ti-arrow-right"></i> Pro freischalten – CHF 9/Mt.</button>
+      <button class="btn primary" style="margin-top:1rem;font-size:13px" onclick="window.open('https://buy.stripe.com/5kQdR98Vt3RJbya7JgbII01','_blank')"><i class="ti ti-arrow-right"></i> Pro freischalten – ab CHF 9/Mt.</button>
     </div>
   </div>
 
-  <!-- NAV BUTTONS -->
   <div class="nav-btns">
     <button class="btn" id="btn-back" onclick="changeStep(-1)" disabled><i class="ti ti-arrow-left"></i> Zurück</button>
-    <span class="step-ind" id="step-ind">Schritt 1 von 6</span>
+    <span class="step-ind" id="step-ind">Schritt 1 von 7</span>
     <button class="btn primary" id="btn-next" onclick="changeStep(1)">Weiter <i class="ti ti-arrow-right"></i></button>
   </div>
 </div>
 
 <script>
 let cur = 1;
-const total = 6;
+const total = 7;
 
 function v(id) { return (document.getElementById(id) || {}).value || ''; }
 function chk(id) { return document.getElementById(id) && document.getElementById(id).checked; }
 function fmt(n) { return Math.round(n).toLocaleString('de-CH'); }
 
-function calcTotal() {
+function getNKTotal() {
+  const ids = ['nk-heizung','nk-wasser','nk-strom','nk-gas','nk-internet','nk-entsorgung','nk-hauswart','nk-weitere'];
+  const typs = ['nk-heizung-typ','nk-wasser-typ','nk-strom-typ','nk-gas-typ','nk-internet-typ','nk-entsorgung-typ','nk-hauswart-typ','nk-weitere-typ'];
+  let total = 0;
+  for (let i = 0; i < ids.length; i++) {
+    const typ = document.getElementById(typs[i]) ? document.getElementById(typs[i]).value : '';
+    if (typ !== 'Nicht verrechnet') total += parseFloat(v(ids[i])) || 0;
+  }
+  return total;
+}
+
+function calcTotal() {}
+
+function calcNK() {
   const m = parseFloat(v('fin-miete')) || 0;
-  const n = parseFloat(v('fin-nk')) || 0;
-  const p = parseFloat(v('fin-pp')) || 0;
-  document.getElementById('t-miete').textContent = fmt(m);
-  document.getElementById('t-nk').textContent = fmt(n);
-  document.getElementById('t-pp').textContent = fmt(p);
-  document.getElementById('t-total').textContent = fmt(m + n + p);
+  const pp = parseFloat(v('fin-pp')) || 0;
+  const nk = getNKTotal();
+  if (document.getElementById('t-miete2')) document.getElementById('t-miete2').textContent = fmt(m);
+  if (document.getElementById('t-nk-total')) document.getElementById('t-nk-total').textContent = fmt(nk);
+  if (document.getElementById('t-pp2')) document.getElementById('t-pp2').textContent = fmt(pp);
+  if (document.getElementById('t-gesamt')) document.getElementById('t-gesamt').textContent = fmt(m + nk + pp);
 }
 
 function toggleBefristet() {
   const wrap = document.getElementById('kond-bis-wrap');
-  wrap.style.display = v('kond-laufzeit') === 'Befristet' ? 'flex' : 'none';
+  if (wrap) wrap.style.display = v('kond-laufzeit') === 'Befristet' ? 'flex' : 'none';
 }
 
 function changeStep(dir) {
@@ -393,7 +477,6 @@ function changeStep(dir) {
   document.getElementById('step' + cur).classList.remove('active');
   cur = next;
   document.getElementById('step' + cur).classList.add('active');
-
   for (let i = 1; i <= total; i++) {
     const sn = document.getElementById('sn' + i);
     const sl = document.getElementById('sl' + i);
@@ -401,18 +484,28 @@ function changeStep(dir) {
     sn.innerHTML = i < cur ? '<i class="ti ti-check" style="font-size:11px"></i>' : i;
     sl.className = 'sl' + (i === cur ? ' active' : '');
   }
-
   document.getElementById('btn-back').disabled = cur === 1;
   document.getElementById('btn-next').innerHTML = cur === total ? '<i class="ti ti-check"></i> Fertig' : 'Weiter <i class="ti ti-arrow-right"></i>';
   document.getElementById('step-ind').textContent = 'Schritt ' + cur + ' von ' + total;
-
-  if (cur === total) buildPreview();
+  if (cur === total) { calcNK(); buildPreview(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function getBeilagen() {
+  const b = [];
+  if (chk('beil-hausordnung')) b.push('Hausordnung');
+  if (chk('beil-schluessel')) b.push('Schlüsselverzeichnis');
+  if (chk('beil-uebergabe')) b.push('Übernahmeprotokoll');
+  if (chk('beil-inventar')) b.push('Inventarliste');
+  if (chk('beil-haustier')) b.push('Regelung Haustierhaltung');
+  if (chk('beil-reserve')) b.push('Mietzinsreserve');
+  if (chk('beil-besond')) b.push('Besondere Bestimmungen');
+  return b;
 }
 
 function buildPreview() {
   const miete = parseFloat(v('fin-miete')) || 0;
-  const nk = parseFloat(v('fin-nk')) || 0;
+  const nk = getNKTotal();
   const pp = parseFloat(v('fin-pp')) || 0;
   const kaution = parseFloat(v('fin-kaution')) || 0;
   const incl = [];
@@ -422,43 +515,54 @@ function buildPreview() {
   if (chk('inc-waschk')) incl.push('Waschküche');
   if (chk('inc-garten')) incl.push('Garten');
   if (chk('inc-velo')) incl.push('Veloraum');
+  if (chk('inc-mansarde')) incl.push('Mansarde');
+  if (chk('inc-terrasse')) incl.push('Terrasse');
 
-  document.getElementById('preview-doc').innerHTML = `
+  const el = document.getElementById('preview-doc');
+  if (!el) return;
+  el.innerHTML = `
     <h2>MIETVERTRAG</h2>
     <div class="subdoc">nach Obligationenrecht Art. 253 ff. (OR) &middot; Schweiz</div>
     <h3>1. Mietobjekt</h3>
     <div class="preview-row"><span>Adresse:</span><span>${v('obj-strasse') || '[Adresse]'}, ${v('obj-lage') || ''}, ${v('obj-plz') || ''} ${v('obj-ort') || ''}</span></div>
-    <div class="preview-row"><span>Zimmer / Fläche:</span><span>${v('obj-zimmer')}${v('obj-flaeche') ? ' / ' + v('obj-flaeche') + ' m²' : ''}</span></div>
+    <div class="preview-row"><span>Typ / Zimmer:</span><span>${v('obj-typ')} &middot; ${v('obj-zimmer')}${v('obj-flaeche') ? ' / ' + v('obj-flaeche') + ' m²' : ''}</span></div>
     <div class="preview-row"><span>Eingeschlossen:</span><span>${incl.join(', ') || '–'}</span></div>
     <div class="preview-row"><span>Parkplatz:</span><span>${v('pp-typ')} ${v('pp-nr')}</span></div>
+    <div class="preview-row"><span>Schlüssel:</span><span>Haustür: ${v('key-haus')} &middot; Wohnung: ${v('key-whg')} &middot; Keller: ${v('key-keller')} &middot; Briefkasten: ${v('key-brief')}</span></div>
     <h3>2. Vertragsparteien</h3>
     <div class="preview-row"><span>Vermieter/in:</span><span>${v('vm-vorname')} ${v('vm-name')}, ${v('vm-strasse')}, ${v('vm-plz')} ${v('vm-ort')}</span></div>
     <div class="preview-row"><span>Mieter/in:</span><span>${v('mt-vorname')} ${v('mt-name')}, ${v('mt-strasse')}</span></div>
-    ${v('mt2-vorname') ? `<div class="preview-row"><span>2. Mieter/in:</span><span>${v('mt2-vorname')} ${v('mt2-name')}</span></div>` : ''}
+    ${v('eh-vorname') ? `<div class="preview-row"><span>Ehegatte/in:</span><span>${v('eh-vorname')} ${v('eh-name')}</span></div>` : ''}
+    ${v('mt2-vorname') ? `<div class="preview-row"><span>Mitmieter/in:</span><span>${v('mt2-vorname')} ${v('mt2-name')}</span></div>` : ''}
     <h3>3. Mietbeginn & Laufzeit</h3>
     <div class="preview-row"><span>Mietbeginn:</span><span>${v('kond-beginn')}</span></div>
     <div class="preview-row"><span>Laufzeit:</span><span>${v('kond-laufzeit')}</span></div>
     <div class="preview-row"><span>Kündigungsfrist:</span><span>${v('kond-kfrist')}</span></div>
+    <div class="preview-row"><span>Kündigungstermine:</span><span>${v('kond-kterm')}</span></div>
     <h3>4. Mietzins & Nebenkosten</h3>
     <div class="preview-row"><span>Nettomiete:</span><span>CHF ${fmt(miete)} / Monat</span></div>
-    <div class="preview-row"><span>Nebenkosten (${v('fin-nk-typ')}):</span><span>CHF ${fmt(nk)} / Monat</span></div>
+    <div class="preview-row"><span>Heizung/Warmwasser:</span><span>CHF ${fmt((parseFloat(v('nk-heizung'))||0)+(parseFloat(v('nk-wasser'))||0))} / Monat (${v('nk-heizung-typ')})</span></div>
+    <div class="preview-row"><span>Internet/TV:</span><span>CHF ${fmt(parseFloat(v('nk-internet'))||0)} / Monat (${v('nk-internet-typ')})</span></div>
+    <div class="preview-row"><span>Nebenkosten total:</span><span>CHF ${fmt(nk)} / Monat</span></div>
     <div class="preview-row"><span>Parkplatz:</span><span>CHF ${fmt(pp)} / Monat</span></div>
     <div class="preview-row"><span><strong>Total monatlich:</strong></span><span><strong>CHF ${fmt(miete + nk + pp)}</strong></span></div>
-    <div class="preview-row"><span>Zahlbar am:</span><span>${v('fin-faellig')}</span></div>
+    <div class="preview-row"><span>NK-Abrechnungsstichtag:</span><span>${v('nk-stichtag')}</span></div>
     <div class="preview-row"><span>Kaution:</span><span>CHF ${fmt(kaution)} (${v('fin-kaution-typ')})</span></div>
     <div class="preview-row"><span>Referenzzinssatz:</span><span>${v('fin-refzins')}%</span></div>
+    ${v('fin-index') ? `<div class="preview-row"><span>LIK-Indexstand:</span><span>${v('fin-index')} Punkte</span></div>` : ''}
     <h3>5. Hausordnung</h3>
     <div class="preview-row"><span>Haustiere:</span><span>${v('kond-haustier')}</span></div>
     <div class="preview-row"><span>Rauchen:</span><span>${v('kond-rauchen')}</span></div>
     <div class="preview-row"><span>Untermiete:</span><span>${v('kond-untermiete')}</span></div>
-    <div class="preview-row"><span>Schlüssel:</span><span>${v('kond-schluessel')} Stück</span></div>
-    <div class="preview-row"><span>Übergabe:</span><span>${v('kond-uebergabe')}</span></div>
     ${v('kond-zusatz') ? `<div class="preview-row"><span>Zusatz:</span><span>${v('kond-zusatz')}</span></div>` : ''}
-    <h3>6. Schlussbestimmungen</h3>
-    <p>Es gilt Schweizer Recht. Gerichtsstand ist der Ort des Mietobjekts. Der Vermieter ist verpflichtet, dem Mieter das Formular 19 (Anfangsmietzinsanzeige) bei Mietbeginn auszuhändigen.</p>
+    <h3>6. Integrierende Bestandteile</h3>
+    <p>${getBeilagen().join(' &middot; ') || '–'}</p>
+    <h3>7. Schlussbestimmungen</h3>
+    <p>Es gilt Schweizer Recht. Gerichtsstand ist der Ort des Mietobjekts. Der Vermieter händigt dem Mieter das Formular 19 (Anfangsmietzinsanzeige) bei Mietbeginn aus. Vertragsänderungen bedürfen der Schriftform.</p>
     <div class="sig-grid">
       <div><div class="sig-line">Ort, Datum: ________________________</div><div style="margin-top:1.5rem" class="sig-line">Unterschrift Vermieter/in</div></div>
       <div><div class="sig-line">Ort, Datum: ________________________</div><div style="margin-top:1.5rem" class="sig-line">Unterschrift Mieter/in</div></div>
+      ${v('eh-vorname') || v('mt2-vorname') ? `<div style="margin-top:1rem"><div class="sig-line">Ort, Datum: ________________________</div><div style="margin-top:1.5rem" class="sig-line">Unterschrift Ehegatte/in bzw. Mitmieter/in</div></div>` : ''}
     </div>
   `;
 }
@@ -476,145 +580,215 @@ async function saveEmailToBrevo(email) {
         email: email,
         listIds: [2],
         updateEnabled: true,
-        attributes: {
-          QUELLE: 'Mietvertrag Generator',
-          DATUM: new Date().toLocaleDateString('de-CH')
-        }
+        attributes: { QUELLE: 'Mietvertrag Generator v2', DATUM: new Date().toLocaleDateString('de-CH') }
       })
     });
-  } catch(e) {
-    console.log('Brevo:', e);
-  }
+  } catch(e) { console.log('Brevo:', e); }
 }
 
 function downloadPDF() {
   const email = document.getElementById('gate-email').value.trim();
-  if (!email || !email.includes('@')) {
-    alert('Bitte gib eine gültige E-Mail-Adresse ein.');
-    return;
-  }
+  if (!email || !email.includes('@')) { alert('Bitte gib eine gültige E-Mail-Adresse ein.'); return; }
   saveEmailToBrevo(email);
 
   try {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
     const miete = parseFloat(v('fin-miete')) || 0;
-    const nk = parseFloat(v('fin-nk')) || 0;
+    const nk = getNKTotal();
     const pp = parseFloat(v('fin-pp')) || 0;
     const kaution = parseFloat(v('fin-kaution')) || 0;
-
-    let y = 20;
     const lm = 20; const pw = 170;
+    let y = 28;
 
-    const addLine = (text, x, yPos, size, bold) => {
-      doc.setFontSize(size || 11);
+    const addLine = (text, x, yPos, size, bold, color) => {
+      doc.setFontSize(size || 10);
       doc.setFont('helvetica', bold ? 'bold' : 'normal');
+      if (color) doc.setTextColor(...color); else doc.setTextColor(0,0,0);
       doc.text(text, x, yPos);
     };
-
     const addSection = (title) => {
-      y += 6;
-      doc.setFillColor(240, 248, 244);
+      y += 5;
+      if (y > 265) { doc.addPage(); y = 20; }
+      doc.setFillColor(225, 245, 238);
       doc.rect(lm, y - 4, pw, 7, 'F');
-      addLine(title, lm + 2, y + 0.5, 11, true);
-      y += 6;
+      doc.setDrawColor(159, 225, 203);
+      doc.rect(lm, y - 4, pw, 7, 'S');
+      addLine(title, lm + 2, y + 0.5, 10, true);
+      y += 7;
     };
-
-    const addRow = (label, val) => {
-      addLine(label + ':', lm, y, 10, false);
+    const addRow = (label, val, bold) => {
+      if (y > 270) { doc.addPage(); y = 20; }
+      doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      const lines = doc.splitTextToSize(val || '–', 100);
-      doc.text(lines, lm + 55, y);
-      y += lines.length * 5 + 1;
+      doc.setTextColor(120, 148, 136);
+      doc.text(label + ':', lm, y);
+      doc.setTextColor(14, 28, 20);
+      doc.setFont('helvetica', bold ? 'bold' : 'normal');
+      const lines = doc.splitTextToSize(val || '–', 110);
+      doc.text(lines, lm + 58, y);
+      y += lines.length * 4.5 + 0.5;
     };
 
-    // Header
+    // HEADER
     doc.setFillColor(29, 158, 117);
-    doc.rect(0, 0, 210, 22, 'F');
-    doc.setTextColor(255, 255, 255);
-    addLine('MIETVERTRAG', lm, 10, 18, true);
-    addLine('immovertrag.ch  ·  nach OR Art. 253 ff.  ·  Schweiz', lm, 17, 9, false);
-    doc.setTextColor(0, 0, 0);
+    doc.rect(0, 0, 210, 24, 'F');
+    doc.setTextColor(255,255,255);
+    addLine('MIETVERTRAG', lm, 11, 18, true);
+    addLine('immovertrag.ch  ·  OR Art. 253 ff.  ·  Schweiz', lm, 18, 8, false);
+    doc.setTextColor(0,0,0);
     y = 30;
-
-    addLine('MIETVERTRAG', 105, y, 16, true);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.text('nach Obligationenrecht Art. 253 ff. (OR) · Schweiz', 105, y + 6, { align: 'center' });
-    y += 16;
+    doc.setFontSize(14); doc.setFont('helvetica','bold');
+    doc.text('MIETVERTRAG FÜR WOHNRÄUME', 105, y, {align:'center'});
+    doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(120,148,136);
+    doc.text('nach Obligationenrecht Art. 253 ff. (OR) · Schweiz', 105, y+5, {align:'center'});
+    doc.setTextColor(0,0,0);
+    y += 14;
 
     addSection('1. Mietobjekt');
+    const incl = [];
+    if (chk('inc-keller')) incl.push('Kellerabteil');
+    if (chk('inc-estrich')) incl.push('Estrichabteil');
+    if (chk('inc-pp')) incl.push('Parkplatz');
+    if (chk('inc-waschk')) incl.push('Waschküche');
+    if (chk('inc-garten')) incl.push('Garten');
+    if (chk('inc-velo')) incl.push('Veloraum');
+    if (chk('inc-mansarde')) incl.push('Mansarde');
+    if (chk('inc-terrasse')) incl.push('Terrasse');
     addRow('Adresse', `${v('obj-strasse')}, ${v('obj-lage')}, ${v('obj-plz')} ${v('obj-ort')}`);
-    addRow('Zimmer / Fläche', `${v('obj-zimmer')}${v('obj-flaeche') ? ' / ' + v('obj-flaeche') + ' m²' : ''}`);
+    addRow('Typ / Zimmer', `${v('obj-typ')} · ${v('obj-zimmer')}${v('obj-flaeche') ? ' / '+v('obj-flaeche')+' m²' : ''}`);
+    addRow('Eingeschlossene Räume', incl.join(', ') || '–');
     addRow('Parkplatz', `${v('pp-typ')} ${v('pp-nr')}`);
+    addRow('Schlüssel', `Haustür: ${v('key-haus')} · Wohnung: ${v('key-whg')} · Keller: ${v('key-keller')} · Briefkasten: ${v('key-brief')}`);
 
     addSection('2. Vertragsparteien');
     addRow('Vermieter/in', `${v('vm-vorname')} ${v('vm-name')}, ${v('vm-strasse')}, ${v('vm-plz')} ${v('vm-ort')}`);
-    addRow('Tel. Vermieter', v('vm-tel'));
+    addRow('Tel. / E-Mail Vermieter', `${v('vm-tel')} · ${v('vm-email')}`);
     addRow('Mieter/in', `${v('mt-vorname')} ${v('mt-name')}, ${v('mt-strasse')}`);
-    if (v('mt2-vorname')) addRow('2. Mieter/in', `${v('mt2-vorname')} ${v('mt2-name')}`);
+    addRow('Tel. / E-Mail Mieter', `${v('mt-tel')} · ${v('mt-email')}`);
+    if (v('eh-vorname')) addRow('Ehegatte/in', `${v('eh-vorname')} ${v('eh-name')}`);
+    if (v('mt2-vorname')) addRow('Mitmieter/in', `${v('mt2-vorname')} ${v('mt2-name')}`);
 
     addSection('3. Mietbeginn & Laufzeit');
     addRow('Mietbeginn', v('kond-beginn'));
-    addRow('Laufzeit', v('kond-laufzeit'));
+    addRow('Laufzeit', v('kond-laufzeit') + (v('kond-laufzeit')==='Befristet' ? ` bis ${v('kond-bis')}` : ''));
     addRow('Kündigungsfrist', v('kond-kfrist'));
+    addRow('Kündigungstermine', v('kond-kterm'));
+    addRow('Übergabedatum', v('kond-uebergabe'));
 
     addSection('4. Mietzins & Nebenkosten');
     addRow('Nettomiete', `CHF ${fmt(miete)} / Monat`);
-    addRow(`Nebenkosten (${v('fin-nk-typ')})`, `CHF ${fmt(nk)} / Monat`);
-    addRow('Parkplatz', `CHF ${fmt(pp)} / Monat`);
-    doc.setFont('helvetica', 'bold');
-    addRow('TOTAL monatlich', `CHF ${fmt(miete + nk + pp)}`);
-    doc.setFont('helvetica', 'normal');
-    addRow('Zahlbar am', v('fin-faellig'));
-    addRow('Kaution', `CHF ${fmt(kaution)} (${v('fin-kaution-typ')})`);
-    addRow('Referenzzinssatz', `${v('fin-refzins')}% (Formular 19 beachten)`);
-    if (v('vm-iban')) addRow('IBAN Vermieter', v('vm-iban'));
 
-    addSection('5. Hausordnung');
+    const nkItems = [
+      ['Heizung/Fernwärme', 'nk-heizung', 'nk-heizung-typ'],
+      ['Warmwasser/Abwasser', 'nk-wasser', 'nk-wasser-typ'],
+      ['Allgemeinstrom', 'nk-strom', 'nk-strom-typ'],
+      ['Gas', 'nk-gas', 'nk-gas-typ'],
+      ['Internet/Radio/TV', 'nk-internet', 'nk-internet-typ'],
+      ['Entsorgungsgebühren', 'nk-entsorgung', 'nk-entsorgung-typ'],
+      ['Hauswartung', 'nk-hauswart', 'nk-hauswart-typ'],
+    ];
+    nkItems.forEach(([label, valId, typId]) => {
+      const typ = document.getElementById(typId) ? document.getElementById(typId).value : '';
+      const val = parseFloat(v(valId)) || 0;
+      if (typ !== 'Nicht verrechnet' && val > 0) {
+        addRow(label, `CHF ${fmt(val)} / Monat (${typ})`);
+      }
+    });
+
+    addRow('Nebenkosten total', `CHF ${fmt(nk)} / Monat`);
+    addRow('Parkplatz', `CHF ${fmt(pp)} / Monat`);
+    doc.setFont('helvetica','bold');
+    addRow('TOTAL MONATLICH', `CHF ${fmt(miete + nk + pp)}`, true);
+    doc.setFont('helvetica','normal');
+    addRow('Zahlbar am', v('fin-faellig'));
+    addRow('NK-Abrechnungsstichtag', v('nk-stichtag'));
+    if (v('vm-iban')) addRow('IBAN Vermieter', v('vm-iban'));
+    if (v('vm-bank')) addRow('Bank / Post', v('vm-bank'));
+    addRow('Kaution', `CHF ${fmt(kaution)} (${v('fin-kaution-typ')}) · fällig bei ${v('fin-kaution-faellig')}`);
+
+    addSection('5. Berechnungsgrundlagen');
+    addRow('Referenzzinssatz', `${v('fin-refzins')}% (Formular 19 beachten)`);
+    if (v('fin-index')) addRow('LIK-Indexstand', `${v('fin-index')} Punkte (Basis: ${v('fin-indexbasis')})`);
+    if (v('fin-abgegolten')) addRow('Kostensteigerungen bis', v('fin-abgegolten'));
+    if (v('fin-vorbehalt')) {
+      addRow('Mietzinsvorbehalt', `${v('fin-vorbehalt')} (OR Art. 269f)`);
+      if (v('fin-vorbehalt-grund')) addRow('Begründung Vorbehalt', v('fin-vorbehalt-grund'));
+    }
+
+    addSection('6. Hausordnung');
     addRow('Haustiere', v('kond-haustier'));
     addRow('Rauchen', v('kond-rauchen'));
     addRow('Untermiete', v('kond-untermiete'));
-    addRow('Schlüssel', `${v('kond-schluessel')} Stück`);
-    addRow('Übergabe', v('kond-uebergabe'));
-    if (v('kond-zusatz')) addRow('Zusatz', v('kond-zusatz'));
+    addRow('Lärm / Instrumente', v('kond-laerm'));
+    if (v('kond-zusatz')) addRow('Weitere Vereinbarungen', v('kond-zusatz'));
 
-    // Schlussbestimmungen
-    y += 4;
-    if (y > 240) { doc.addPage(); y = 20; }
-    addSection('6. Schlussbestimmungen');
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'normal');
-    const schluss = 'Es gilt Schweizer Recht. Gerichtsstand ist der Ort des Mietobjekts. Änderungen dieses Vertrages bedürfen der Schriftform. Der Vermieter händigt dem Mieter das Formular 19 (Anfangsmietzinsanzeige) bei Mietbeginn aus.';
-    const schlussLines = doc.splitTextToSize(schluss, pw);
-    doc.text(schlussLines, lm, y);
-    y += schlussLines.length * 5 + 8;
+    const beilagen = getBeilagen();
+    if (beilagen.length > 0) {
+      addSection('7. Integrierende Bestandteile');
+      addRow('Beilagen', beilagen.join(', '));
+    }
 
-    // Unterschriften
+    addSection('8. Allgemeine Bedingungen');
+    const abText = [
+      'Gebrauch: Der Mieter verwendet das Mietobjekt als Wohnraum. Wesentliche Änderungen bedürfen der Zustimmung des Vermieters.',
+      'Unterhalt: Kleinere Reparaturen (kleiner Unterhalt) gehen zu Lasten des Mieters. Grössere Mängel sind dem Vermieter zu melden.',
+      'Untermiete: Nur mit vorgängiger schriftlicher Zustimmung des Vermieters (OR Art. 262).',
+      'Kündigung: Schriftlich per Einschreiben. Kündigung Familienwohnung erfordert Zustimmung beider Ehegatten.',
+      'Rückgabe: Mietobjekt ist in vertragsgemässem Zustand zurückzugeben. Ein Übergabeprotokoll wird erstellt.'
+    ];
+    doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(50,50,50);
+    abText.forEach(line => {
+      if (y > 270) { doc.addPage(); y = 20; }
+      const lines = doc.splitTextToSize(line, pw);
+      doc.text(lines, lm, y);
+      y += lines.length * 4 + 2;
+    });
+
+    // UNTERSCHRIFTEN
     if (y > 240) { doc.addPage(); y = 20; }
     y += 10;
+    addSection('9. Unterschriften');
+    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(0,0,0);
+    doc.text('Die Vertragsparteien bestätigen mit ihrer Unterschrift die Kenntnisnahme des Vertragsinhalts.', lm, y);
+    y += 12;
     doc.line(lm, y, lm + 75, y);
     doc.line(lm + 95, y, lm + 170, y);
-    doc.setFontSize(9);
+    doc.setFontSize(8); doc.setTextColor(120,148,136);
     doc.text('Ort, Datum / Unterschrift Vermieter/in', lm, y + 5);
     doc.text('Ort, Datum / Unterschrift Mieter/in', lm + 95, y + 5);
+    if (v('eh-vorname') || v('mt2-vorname')) {
+      y += 18;
+      doc.line(lm, y, lm + 75, y);
+      doc.text('Ort, Datum / Unterschrift Ehegatte/in bzw. Mitmieter/in', lm, y + 5);
+    }
 
-    // Footer
-    doc.setFontSize(8);
-    doc.setTextColor(150, 150, 150);
-    doc.text('Erstellt mit immovertrag.ch · Schweizer Mietrecht OR Art. 253 ff. · ' + new Date().toLocaleDateString('de-CH'), 105, 290, { align: 'center' });
+    // FOOTER
+    doc.setFontSize(7); doc.setTextColor(150,150,150);
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.text(`Erstellt mit immovertrag.ch · Schweizer Mietrecht OR Art. 253 ff. · ${new Date().toLocaleDateString('de-CH')} · Seite ${i}/${pageCount}`, 105, 290, { align: 'center' });
+    }
 
-    const mt = v('mt-name') || 'Mietvertrag';
-    doc.save('Mietvertrag_' + mt + '_immovertrag.pdf');
-
+    doc.save('Mietvertrag_' + (v('mt-name') || 'immovertrag') + '.pdf');
     document.getElementById('email-gate').style.display = 'none';
     document.getElementById('success-box').style.display = 'block';
 
-  } catch (e) {
+  } catch(e) {
     alert('PDF-Erstellung fehlgeschlagen. Bitte versuche es nochmals.\n' + e.message);
   }
 }
+
+// Init
+window.addEventListener('load', () => {
+  calcNK();
+  const today = new Date().toISOString().split('T')[0];
+  const beg = document.getElementById('kond-beginn');
+  const ueb = document.getElementById('kond-uebergabe');
+  if (beg && !beg.value) beg.value = today;
+  if (ueb && !ueb.value) ueb.value = today;
+});
 </script>
 </body>
 </html>
